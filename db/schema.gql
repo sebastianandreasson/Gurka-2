@@ -1,0 +1,37 @@
+type Image @collection(name: "images") {
+  url: String!
+  taken: String!
+  type: String!
+}
+
+input SubmitImageInput {
+  url: String!
+  taken: String!
+  type: String!
+}
+
+type Gurka @collection(name: "gurkor") {
+  name: String!
+  species: String!
+  hobby: String!
+  bio: String!
+  votes: Int!
+}
+
+input SubmitGurkaInput {
+  name: String!
+  species: String!
+  hobby: String!
+  bio: String!
+  votes: Int!
+}
+
+type Query {
+  allImages: [Image!]! @index(name: "all_images")
+  allGurkor: [Gurka!]! @index(name: "all_gurkor")
+}
+
+type Mutation {
+  submitImage(image: SubmitImageInput): Image! @resolver(name: "submit_image")
+  submitGurka(gurka: SubmitGurkaInput): Gurka! @resolver(name: "submit_gurka")
+}
