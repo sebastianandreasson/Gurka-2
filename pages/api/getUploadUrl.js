@@ -1,4 +1,17 @@
 import aws from 'aws-sdk'
+import moment from 'moment'
+import { gql, GraphQLClient } from 'graphql-request'
+
+const query = gql`
+  mutation($data: ImageInput!) {
+    createImage(data: $data) {
+      _id
+      url
+      taken
+      type
+    }
+  }
+`
 
 export default async function handler(req, res) {
   aws.config.update({
@@ -7,20 +20,32 @@ export default async function handler(req, res) {
     region: process.env.AWS_BUCKET_REGION,
     signatureVersion: 'v4',
   })
+  const s3Url = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_BUCKET_REGION}.amazonaws.com`
+  const token = process.env.NEXT_PUBLIC_FAUNADB_SECRET
+  const client = new GraphQLClient('https://graphql.fauna.com/graphql', {
+    headers: {
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  })
+  const { file, type } = req.query
 
   const s3 = new aws.S3()
-  const post = await s3.createPresignedPost({
+  const url = s3.getSignedUrl('putObject', {
     Bucket: process.env.AWS_BUCKET_NAME,
-    Fields: {
-      key: req.query.file,
-      acl: 'public-read',
-    },
-    Expires: 60,
-    Conditions: [
-      ['content-length-range', 0, 1048576], // up to 1 MB
-    ],
+    Key: file,
+    ACL: 'public-read',
+    Expires: 120,
+    ContentType: 'application/octet-stream',
   })
-  console.log('return url')
+  await client.request(query, {
+    data: {
+      url: `${s3Url}/${file}`,
+      taken: file.replace('.jpg', ''),
+      type,
+    },
+  })
 
-  res.status(200).json(post)
+  res.status(200).json({
+    url,
+  })
 }
