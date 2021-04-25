@@ -1,16 +1,12 @@
 import { useImages } from '../state/hooks'
-import Image from 'next/image'
+import ImageSlider from '../components/ImageSlider'
 
 export default function Home() {
-  const images = useImages()
-
-  console.log(images)
+  useImages()
 
   return (
     <div>
-      {images.map((i) => (
-        <Image src={i.url} width={200} height={500} />
-      ))}
+      <ImageSlider />
     </div>
   )
 }

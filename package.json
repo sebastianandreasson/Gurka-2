@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "antd": "^4.15.2",
     "aws-sdk": "^2.892.0",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",

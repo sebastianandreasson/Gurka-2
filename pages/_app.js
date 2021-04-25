@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import 'antd/dist/antd.css'
 import { RecoilRoot } from 'recoil'
 import { createClient, Provider } from 'urql'
 
