@@ -5,7 +5,7 @@ import { imagesAtom } from './index'
 
 const ImageQuery = `
 {
-  allImages {
+  allImages(_size: 5000) {
     data {
       taken
       url

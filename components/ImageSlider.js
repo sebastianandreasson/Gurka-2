@@ -5,6 +5,8 @@ import { imagesAtom } from '../state'
 import Image from 'next/image'
 import { Slider } from 'antd'
 
+const Container = styled.div``
+
 const ImageSlider = () => {
   const images = useRecoilValue(imagesAtom)
   const [index, setIndex] = useState(0)
@@ -13,7 +15,7 @@ const ImageSlider = () => {
 
   const image = images[index]
   return (
-    <div>
+    <Container>
       <Image src={image.url} width={250} height={500} />
       {image.taken}
       <Slider
@@ -21,7 +23,7 @@ const ImageSlider = () => {
         max={images.length - 1}
         onChange={(v) => setIndex(v)}
       />
-    </div>
+    </Container>
   )
 }
 
