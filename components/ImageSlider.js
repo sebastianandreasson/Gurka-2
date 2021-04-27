@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 import { imagesAtom } from '../state'
@@ -33,9 +33,24 @@ const ImageContainer = styled.div`
   }
 `
 
+let imageCache = {}
 const ImageSlider = () => {
   const images = useRecoilValue(imagesAtom)
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(images.length ? images.length - 1 : 0)
+
+  useEffect(() => {
+    if (!images.length) return
+    const from = Math.max(0, index - 10)
+    const to = Math.min(images.length, index + 10)
+
+    for (let i = from; i < to; i++) {
+      if (!imageCache[i]) {
+        const preloadImage = new window.Image()
+        preloadImage.src = images[i].url
+        imageCache[i] = preloadImage
+      }
+    }
+  }, [images, index])
 
   if (!images.length) return null
 
