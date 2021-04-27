@@ -5,7 +5,7 @@ import { imagesAtom } from './index'
 
 const ImageQuery = `
 {
-  allImages(_size: 5000) {
+  getImages(type: "front", _size: 5000) {
     data {
       taken
       url
@@ -23,7 +23,7 @@ export const useImages = () => {
 
   useEffect(() => {
     if (!!data) {
-      setImages(data.allImages.data)
+      setImages(data.getImages.data)
     }
   }, [data, setImages])
 

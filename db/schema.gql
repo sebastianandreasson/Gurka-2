@@ -28,6 +28,7 @@ input SubmitGurkaInput {
 
 type Query {
   allImages: [Image!]! @index(name: "all_images")
+  getImages(type: String!): [Image!]! @index(name: "images_by_type")ƒ
   allGurkor: [Gurka!]! @index(name: "all_gurkor")
 }
 

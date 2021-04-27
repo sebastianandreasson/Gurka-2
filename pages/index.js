@@ -1,9 +1,14 @@
 import { useImages } from '../state/hooks'
 import styled from 'styled-components'
 import ImageSlider from '../components/ImageSlider'
+import Header from '../components/Header'
 
 const Container = styled.div`
-  margin: 0 auto;
+  background-color: #d9f9a5;
+`
+
+const Content = styled.div`
+  margin: 32px auto;
   width: 80%;
 `
 
@@ -12,7 +17,10 @@ export default function Home() {
 
   return (
     <Container>
-      <ImageSlider />
+      <Header />
+      <Content>
+        <ImageSlider />
+      </Content>
     </Container>
   )
 }
