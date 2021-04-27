@@ -46,7 +46,7 @@ const ImageSlider = () => {
     for (let i = from; i < to; i++) {
       if (!imageCache[i]) {
         const preloadImage = new window.Image()
-        preloadImage.src = `/_next/image?url=${encodeURI(
+        preloadImage.src = `/_next/image?url=${encodeURIComponent(
           images[i].url
         )}&w=828&q=75`
         imageCache[i] = preloadImage
