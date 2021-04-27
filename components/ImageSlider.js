@@ -43,7 +43,7 @@ const ImageSlider = () => {
   return (
     <Container>
       <ImageContainer>
-        <Image src={image.url} width={300} height={534} />
+        <Image src={image.url} width={400} height={712} />
         <span>{moment(image.taken).format('YYYY-MM-DD HH:mm')}</span>
       </ImageContainer>
       <Slider
