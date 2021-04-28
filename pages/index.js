@@ -16,7 +16,8 @@ const Content = styled.div`
 `
 
 const List = styled.div`
-  width: 100%;
+  flex: 1;
+  margin: 0 64px;
   display: flex;
   flex-direction: column;
 
@@ -27,7 +28,6 @@ const List = styled.div`
 `
 
 const Grid = styled.div`
-  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 32px;
