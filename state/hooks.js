@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react'
 import { useRecoilState } from 'recoil'
 import { useMutation, useQuery } from 'urql'
-import { imagesAtom } from './index'
+import { imagesAtom, gurkAtom } from './index'
 
 const ImageQuery = `
 {
@@ -28,4 +28,36 @@ export const useImages = () => {
   }, [data, setImages])
 
   return images
+}
+
+const GurkQuery = `
+{
+  allGurkor {
+    data {
+      name
+      species
+      hobby
+      bio
+      personality
+      position
+      votes
+    }
+  }
+}
+`
+
+export const useGurkor = () => {
+  const [gurkor, setGurkor] = useRecoilState(gurkAtom)
+  const [result] = useQuery({
+    query: GurkQuery,
+  })
+  const { data } = result
+
+  useEffect(() => {
+    if (!!data) {
+      setGurkor(data.allGurkor.data)
+    }
+  }, [data, setGurkor])
+
+  return gurkor
 }

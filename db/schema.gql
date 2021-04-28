@@ -15,6 +15,8 @@ type Gurka @collection(name: "gurkor") {
   species: String!
   hobby: String!
   bio: String!
+  personality: String!
+  position: Int!
   votes: Int!
 }
 
@@ -23,12 +25,16 @@ input SubmitGurkaInput {
   species: String!
   hobby: String!
   bio: String!
+  personality: String!
+  position: Int!
   votes: Int!
 }
 
 type Query {
   allImages: [Image!]! @index(name: "all_images")
-  getImages(type: String!): [Image!]! @index(name: "images_by_type")ƒ
+  getImages(type: String!): [Image!]! @index(name: "images_by_type")
+  getLatestImages(type: String!): [Image!]!
+    @index(name: "latest_images_by_type")
   allGurkor: [Gurka!]! @index(name: "all_gurkor")
 }
 
