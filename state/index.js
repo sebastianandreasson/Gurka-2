@@ -15,15 +15,6 @@ export const gurkAtom = atom({
   default: [],
 })
 
-/*export const profilePicture = selectorFamily({
-  key: 'profile-picture',
-  get: (index) => ({ get }) => {
-    const profilePictures = get(profilePicturesAtom)
-
-    return profilePictures[index]
-  },
-})*/
-
 export const profilePictureSelector = selector({
   key: 'profile-picture',
   get: ({ get }) => {

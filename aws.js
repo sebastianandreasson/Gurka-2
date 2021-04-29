@@ -41,7 +41,7 @@ export const getImages = async (type) => {
         ScanIndexForward: false,
       })
       .promise()
-    return result.Items.sort((a, b) => a.date - b.date)
+    return result.Items.sort((a, b) => new Date(a.date) - new Date(b.date))
   } catch (e) {
     console.log(e)
   }
