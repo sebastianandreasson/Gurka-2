@@ -7,6 +7,7 @@ import { tablet } from '../utils/layout'
 
 const Container = styled.div`
   background-color: #fafafa;
+  max-width: 500px;
   height: 150px;
   border-radius: 16px;
 

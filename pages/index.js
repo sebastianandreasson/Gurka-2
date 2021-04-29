@@ -60,7 +60,6 @@ export default function Home() {
       <Content>
         <ImageSlider />
         <List>
-          <h1>Gurkor</h1>
           <Grid>
             {gurkor.map((g) => (
               <Gurka {...g} />
