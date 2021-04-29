@@ -1,4 +1,4 @@
-import { useGurkor, useImages } from '../state/hooks'
+import { useGurkor, useImages, useProfilePictures } from '../state/hooks'
 import styled from 'styled-components'
 import ImageSlider from '../components/ImageSlider'
 import Header from '../components/Header'
@@ -35,6 +35,7 @@ const Grid = styled.div`
 
 export default function Home() {
   useImages()
+  useProfilePictures()
   const gurkor = useGurkor()
 
   return (
@@ -45,7 +46,7 @@ export default function Home() {
         <List>
           <h1>Gurkor</h1>
           <Grid>
-            {[...gurkor, ...gurkor, ...gurkor].map((g) => (
+            {gurkor.map((g) => (
               <Gurka {...g} />
             ))}
           </Grid>
