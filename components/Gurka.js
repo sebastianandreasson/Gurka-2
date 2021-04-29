@@ -3,15 +3,20 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { profilePictureSelector } from '../state'
 import styled from 'styled-components'
+import { tablet } from '../utils/layout'
 
 const Container = styled.div`
-  background-color: white;
+  background-color: #fafafa;
   height: 150px;
   border-radius: 16px;
 
   display: flex;
   justify-content: space-between;
   padding: 16px 32px;
+
+  ${tablet()} {
+    min-width: 400px;
+  }
 `
 
 const Content = styled.div`
@@ -27,6 +32,12 @@ const Texts = styled.div`
 
   > h2 {
     margin: 0;
+    line-height: 25px;
+    font-weight: 600;
+  }
+  > span {
+    font-weight: 200;
+    font-style: italic;
   }
 `
 
@@ -41,7 +52,7 @@ const ProfilePicture = styled.div`
   height: 118px;
   border-radius: 50%;
 
-  border: 1px solid black;
+  border: 2px solid #33261d;
   overflow: hidden;
 
   > img {
@@ -88,12 +99,10 @@ const Gurka = ({ name, species, position }) => {
     <Container>
       <Content>
         <Texts>
-          <h2>
-            {name} - {position}
-          </h2>
+          <h2>{name}</h2>
           <span>{species}</span>
         </Texts>
-        <Button>Chat</Button>
+        <Button onClick={() => alert('coming soon...?')}>Chat 🥒 </Button>
       </Content>
       <ProfilePicture {...offsetForPosition(position)}>
         <img src={profilePicture ? profilePicture.url : ''}></img>

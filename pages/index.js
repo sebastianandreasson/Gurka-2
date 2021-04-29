@@ -3,9 +3,11 @@ import styled from 'styled-components'
 import ImageSlider from '../components/ImageSlider'
 import Header from '../components/Header'
 import Gurka from '../components/Gurka'
+import { laptop, mobile, smallLaptop, tablet } from '../utils/layout'
 
 const Container = styled.div`
   background-color: #d9f9a5;
+  margin-bottom: 100px;
 `
 
 const Content = styled.div`
@@ -13,6 +15,15 @@ const Content = styled.div`
   width: 80%;
 
   display: flex;
+
+  ${laptop()} {
+    width: 95%;
+  }
+
+  ${tablet()} {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const List = styled.div`
@@ -22,6 +33,7 @@ const List = styled.div`
   flex-direction: column;
 
   > h1 {
+    font-weight: 800;
     font-size: 48px;
     color: #33261d;
   }
@@ -31,6 +43,10 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 32px;
+
+  ${smallLaptop()} {
+    grid-template-columns: 1fr;
+  }
 `
 
 export default function Home() {

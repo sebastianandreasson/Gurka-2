@@ -7,6 +7,7 @@ import { Slider } from 'antd'
 import moment from 'moment'
 
 const Container = styled.div`
+  min-width: 400px;
   width: 400px;
   display: flex;
   flex-direction: column;
