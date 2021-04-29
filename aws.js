@@ -5,7 +5,7 @@ import moment from 'moment'
 aws.config.update({
   accessKeyId: process.env.AWS_KEY,
   secretAccessKey: process.env.AWS_SECRET,
-  region: process.env.AWS_REGION,
+  region: process.env.MY_AWS_REGION,
   signatureVersion: 'v4',
 })
 
