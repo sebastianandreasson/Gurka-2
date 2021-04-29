@@ -37,7 +37,11 @@ const ImageContainer = styled.div`
 let imageCache = {}
 const ImageSlider = () => {
   const images = useRecoilValue(imagesAtom)
-  const [index, setIndex] = useState(images.length ? images.length - 1 : 0)
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    if (images.length) setIndex(images.length - 1)
+  }, [images, setIndex])
 
   useEffect(() => {
     if (!images.length) return

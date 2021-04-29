@@ -7,7 +7,7 @@ import { laptop, mobile, smallLaptop, tablet } from '../utils/layout'
 
 const Container = styled.div`
   background-color: #d9f9a5;
-  margin-bottom: 100px;
+  padding-bottom: 100px;
 `
 
 const Content = styled.div`

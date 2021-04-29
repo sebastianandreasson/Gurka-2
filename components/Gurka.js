@@ -92,7 +92,6 @@ const offsetForPosition = (pos) => {
 }
 
 const Gurka = ({ name, species, position }) => {
-  console.log({ name, species, position })
   const profilePicture = useRecoilValue(profilePictureSelector)
 
   return (
