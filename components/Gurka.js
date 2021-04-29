@@ -86,7 +86,7 @@ const Gurka = ({ name, species, position }) => {
         <Button>Chat</Button>
       </Content>
       <ProfilePicture {...offsetForPosition(position)}>
-        <img src={profilePicture.url}></img>
+        <img src={profilePicture ? profilePicture.url : ''}></img>
       </ProfilePicture>
     </Container>
   )

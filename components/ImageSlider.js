@@ -61,7 +61,7 @@ const ImageSlider = () => {
     <Container>
       <ImageContainer>
         <Image src={image.url} width={400} height={712} priority />
-        <span>{moment(image.taken).format('YYYY-MM-DD HH:mm')}</span>
+        <span>{moment(image.date).format('YYYY-MM-DD HH:mm')}</span>
       </ImageContainer>
       <Slider
         value={index}

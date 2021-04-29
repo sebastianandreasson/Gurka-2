@@ -38,11 +38,10 @@ export const getImages = async (type) => {
         ExpressionAttributeValues: {
           ':imageType': type,
         },
-        Limit: 5,
         ScanIndexForward: false,
       })
       .promise()
-    return result.Items
+    return result.Items.sort((a, b) => a.date - b.date)
   } catch (e) {
     console.log(e)
   }
