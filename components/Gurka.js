@@ -65,6 +65,16 @@ const offsetForPosition = (pos) => {
       return { x: 85, y: 102 }
     case 4:
       return { x: 0, y: 220 }
+    case 5:
+      return { x: 95, y: 215 }
+    case 6:
+      return { x: 0, y: 330 }
+    case 7:
+      return { x: 90, y: 325 }
+    case 8:
+      return { x: 10, y: 425 }
+    case 9:
+      return { x: 90, y: 425 }
     default:
       return { x: 0, y: 0 }
   }
