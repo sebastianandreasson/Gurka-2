@@ -5,12 +5,18 @@ import { imagesAtom } from '../state'
 import Image from 'next/image'
 import { Slider } from 'antd'
 import moment from 'moment'
+import { mobile } from '../utils/layout'
 
 const Container = styled.div`
   min-width: 400px;
   width: 400px;
   display: flex;
   flex-direction: column;
+
+  ${mobile()} {
+    min-width: 100%;
+    width: 100%;
+  }
 `
 
 const ImageContainer = styled.div`
@@ -31,6 +37,10 @@ const ImageContainer = styled.div`
     border-radius: 16px;
     font-size: 14px;
     font-weight: bold;
+  }
+
+  ${mobile()} {
+    height: 570px;
   }
 `
 

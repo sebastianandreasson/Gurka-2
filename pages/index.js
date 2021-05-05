@@ -1,9 +1,13 @@
+import { useEffect } from 'react'
 import { useGurkor, useImages, useProfilePictures } from '../state/hooks'
 import styled from 'styled-components'
 import ImageSlider from '../components/ImageSlider'
 import Header from '../components/Header'
 import Gurka from '../components/Gurka'
 import { laptop, mobile, smallLaptop, tablet } from '../utils/layout'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { chatsAtom, currentlyChattingAtom } from '../state'
+import Chat from '../components/Chat'
 
 const Container = styled.div`
   background-color: #d9f9a5;
@@ -37,6 +41,9 @@ const List = styled.div`
     font-size: 48px;
     color: #33261d;
   }
+  ${mobile()} {
+    margin: 0;
+  }
 `
 
 const Grid = styled.div`
@@ -47,12 +54,27 @@ const Grid = styled.div`
   ${smallLaptop()} {
     grid-template-columns: 1fr;
   }
+
+  ${mobile()} {
+    grid-gap: 16px;
+  }
 `
 
 export default function Home() {
   useImages()
   useProfilePictures()
+  const [chats, setChats] = useRecoilState(chatsAtom)
+  const currentlyChatting = useRecoilValue(currentlyChattingAtom)
   const gurkor = useGurkor()
+
+  useEffect(() => {
+    if (currentlyChatting && !chats[currentlyChatting]) {
+      setChats((chats) => ({
+        ...chats,
+        [currentlyChatting]: [],
+      }))
+    }
+  }, [currentlyChatting])
 
   return (
     <Container>
@@ -66,6 +88,7 @@ export default function Home() {
             ))}
           </Grid>
         </List>
+        {currentlyChatting && <Chat />}
       </Content>
     </Container>
   )

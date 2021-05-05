@@ -1,9 +1,9 @@
 import { Button } from 'antd'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
-import { profilePictureSelector } from '../state'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { currentlyChattingAtom, profilePictureSelector } from '../state'
 import styled from 'styled-components'
-import { tablet } from '../utils/layout'
+import { mobile, tablet } from '../utils/layout'
 
 const Container = styled.div`
   background-color: #fafafa;
@@ -17,6 +17,11 @@ const Container = styled.div`
 
   ${tablet()} {
     min-width: 400px;
+  }
+
+  ${mobile()} {
+    width: 100%;
+    min-width: 100%;
   }
 `
 
@@ -63,6 +68,9 @@ const ProfilePicture = styled.div`
     top: -${({ y }) => topLeft.y + y}px;
     position: absolute;
   }
+  ${mobile()} {
+    transform: scale(0.8);
+  }
 `
 
 const offsetForPosition = (pos) => {
@@ -94,6 +102,7 @@ const offsetForPosition = (pos) => {
 
 const Gurka = ({ name, species, position }) => {
   const profilePicture = useRecoilValue(profilePictureSelector)
+  const [, setCurrentlyChatting] = useRecoilState(currentlyChattingAtom)
 
   return (
     <Container>
@@ -102,7 +111,7 @@ const Gurka = ({ name, species, position }) => {
           <h2>{name}</h2>
           <span>{species}</span>
         </Texts>
-        <Button onClick={() => alert('coming soon...?')}>Chat 🥒 </Button>
+        <Button onClick={() => setCurrentlyChatting(name)}>Chat 🥒 </Button>
       </Content>
       <ProfilePicture {...offsetForPosition(position)}>
         <img src={profilePicture ? profilePicture.url : ''}></img>
