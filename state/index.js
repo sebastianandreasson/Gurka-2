@@ -65,7 +65,6 @@ export const activeChatSelector = selector({
     const name = get(currentlyChattingAtom)
 
     if (chats[name]) return chats[name]
-
     return []
   },
 })

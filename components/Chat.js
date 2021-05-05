@@ -123,7 +123,7 @@ const Chat = () => {
       ...chats,
       [gurka.name]: [
         ...chats[gurka.name],
-        { from: 'Gurban', text: response.text },
+        { from: gurka.name, text: response.text },
       ],
     }))
   }
