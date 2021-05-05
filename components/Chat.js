@@ -12,8 +12,10 @@ import styled from 'styled-components'
 import { tablet } from '../utils/layout'
 import { sendChatMessage } from '../state/api'
 import { CloseOutlined } from '@ant-design/icons'
+import LoadingDots from './LoadingDots'
 
 const Container = styled.div`
+  transition: all ease-in-out 250ms;
   position: fixed;
   bottom: 0;
   right: 100px;
@@ -46,19 +48,22 @@ const TopBar = styled.div`
   justify-content: space-between;
 
   > span {
+    font-weight: bold;
     font-size: 16px;
   }
 `
 
 const BottomBar = styled.div`
-  width: 282px;
+  width: 332px;
   margin: 8px;
   position: fixed;
   bottom: 0;
-  display: flex;
 
-  > button {
-    margin-left: 16px;
+  > form {
+    display: flex;
+    > button {
+      margin-left: 16px;
+    }
   }
 
   ${tablet()} {
@@ -72,7 +77,7 @@ const Messages = styled.div`
 
   overflow-y: scroll;
   padding: 0 16px;
-  margin-bottom: 44px;
+  margin-bottom: 64px;
 `
 
 const MessageText = styled.span`
@@ -89,6 +94,13 @@ const MessageText = styled.span`
     background-color: #473335;
     color: white;
   `}
+
+  ${({ loading }) =>
+    loading &&
+    `
+    width: 60px;
+    padding: 12px;
+  `}
 `
 
 const AlwaysScrollToBottom = () => {
@@ -99,6 +111,7 @@ const AlwaysScrollToBottom = () => {
 
 const Chat = () => {
   const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
   const [, setActiveChat] = useRecoilState(currentlyChattingAtom)
   const gurka = useRecoilValue(activeGurkaSelector)
   const age = useRecoilValue(ageOfGurkSelector)
@@ -118,6 +131,7 @@ const Chat = () => {
       [gurka.name]: [...chat, { from: 'Human', text: message }],
     }))
     setMessage('')
+    setLoading(true)
     const response = await sendChatMessage(request)
     setChats((chats) => ({
       ...chats,
@@ -126,6 +140,7 @@ const Chat = () => {
         { from: gurka.name, text: response.text },
       ],
     }))
+    setLoading(false)
   }
 
   return (
@@ -138,14 +153,26 @@ const Chat = () => {
         {chat.map((msg) => (
           <MessageText fromUser={msg.from === 'Human'}>{msg.text}</MessageText>
         ))}
+        {loading && (
+          <MessageText loading>
+            <LoadingDots />
+          </MessageText>
+        )}
         <AlwaysScrollToBottom />
       </Messages>
       <BottomBar>
-        <Input
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        ></Input>
-        <Button onClick={() => onClick()}>Send</Button>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            onClick()
+          }}
+        >
+          <Input
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          ></Input>
+          <Button onClick={() => onClick()}>Send</Button>
+        </form>
       </BottomBar>
     </Container>
   )
