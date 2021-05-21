@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 import { imagesAtom } from '../state'
-import Image from 'next/image'
 import { Slider } from 'antd'
 import moment from 'moment'
 import { mobile } from '../utils/layout'
@@ -61,9 +60,7 @@ const ImageSlider = () => {
     for (let i = from; i < to; i++) {
       if (!imageCache[i]) {
         const preloadImage = new window.Image()
-        preloadImage.src = `/_next/image?url=${encodeURIComponent(
-          images[i].url
-        )}&w=828&q=75`
+        preloadImage.src = images[i].url
         imageCache[i] = preloadImage
       }
     }
@@ -75,7 +72,7 @@ const ImageSlider = () => {
   return (
     <Container>
       <ImageContainer>
-        <Image src={image.url} width={400} height={712} priority />
+        <img src={image.url} width={400} height={712} />
         <span>{moment(image.date).format('YYYY-MM-DD HH:mm')}</span>
       </ImageContainer>
       <Slider
